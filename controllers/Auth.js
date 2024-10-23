@@ -1,8 +1,9 @@
-const User = require("../models/User");
+const {User} = require("../models/User");
 const OTP = require("../models/Otp");
 const otpGenerator = require("otp-generator")
 const bcrypt = require("bcrypt");
-const jwt = require("jsonwebtokens");
+const jwt = require("jsonwebtoken");
+const mailsender = require("../utils/mailSender");
 require("dotenv").config();
 
 
@@ -11,10 +12,10 @@ const sendOTP = async (req,res) =>{
    
    try {
     //fetch  email from request body
-    const {email} = req.body;
+    // const {email} = req.body;
 
     //check if user already exist
-    const checkUserPresent = await User.findOne( {email} );
+    const checkUserPresent = await User.findOne(req.body.email );
 
     //if user already exist , then return a response
     if(checkUserPresent){
@@ -63,7 +64,7 @@ const sendOTP = async (req,res) =>{
 
    } 
    catch (error) {
-    console.log(error);
+    console.log("Something is Wrong in Auth for SendOtp",error);
     return res.status(500).json({
         success:false,
         message:error.message,
@@ -73,10 +74,11 @@ const sendOTP = async (req,res) =>{
      
 };
 
-module.exports = sendOTP;
+//module.exports = sendOTP;
 
 //signup
 const signup = async (req , res) =>{
+    
     try {
         //data fetch from req ki body
     const {
@@ -89,10 +91,9 @@ const signup = async (req , res) =>{
         contactNumber,
         otp
     } = req.body;
-
+    console.log(req.body);
     //validate krlo
-    if(!firstName || !lastName ||!email ||!password ||!confirmPassword
-        ||!otp)  {
+    if(!req.body.firstName || !req.body.lastName || !req.body.email ||!req.body.password ||!req.body.confirmPassword || !req.body.contactNumber || !req.body.otp)  {
             return res.status(403).json({
                 success:false,
                 message:"All fields are required",
@@ -169,7 +170,7 @@ const signup = async (req , res) =>{
         
     }
 };
-module.exports = signup;
+//module.exports = signup;
 
 //login controller for authentication__>
 const login = async (req,res) =>{
@@ -233,7 +234,7 @@ const login = async (req,res) =>{
     });
    }
 };
-module.exports = login;
+//module.exports = login;
 
 //change Password
 const changePassword = async (req,res)=>{
@@ -246,5 +247,10 @@ const changePassword = async (req,res)=>{
     //return response
 
 }
-module.exports = changePassword;
+module.exports = {
+    changePassword,
+    login,
+    signup,
+    sendOTP
 
+}

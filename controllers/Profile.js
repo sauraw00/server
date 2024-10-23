@@ -39,7 +39,7 @@ const updateProfile = async(req,res) =>{
            })
     }
 } 
-module.exports = updateProfile;
+//module.exports = updateProfile;
 
 //delete account_____________________>
 
@@ -77,7 +77,7 @@ const deleteAccount = async(req,res) =>{
         
     }
 }
-module.exports = deleteAccount;
+//module.exports = deleteAccount;
 
 //get all details of user________________>
 
@@ -105,4 +105,8 @@ try {
 }
 
 }
-module.exports =getAllUserDetails;
+module.exports ={
+    getAllUserDetails,
+    updateProfile,
+    deleteAccount
+}

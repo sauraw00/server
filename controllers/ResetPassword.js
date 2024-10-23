@@ -58,7 +58,7 @@ const resetPasswordToken = async(req, res) =>{
 
 
 }
-module.exports = resetPasswordToken;
+//module.exports = resetPasswordToken;
 
 
 //reset password--------------------------->
@@ -119,4 +119,7 @@ return res.status(200).json({
     
 }
 }
-module.exports = resetPassword;
+module.exports = {
+    resetPassword,
+    resetPasswordToken
+}

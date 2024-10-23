@@ -6,13 +6,15 @@ const mailSender = require("../utils/mailSender");
 //const {courseEnrollmentEmail} = requrie("../mail/templetes/courseEnrollmentEmail");
 
 //capture the payment and initiate the rozerpay order
-const capturePayment= async(req,res) =>{
+const capturePayment = async (req,res) =>{
 
     //get courseId and userId
-    const {course_id} = req.body;
-    const userId = req.user.id;
+    const {course_id} = req.body.course_id;
+    const userId = req.body.userid; 
+
     //validation
     //valid courseId
+
     if(!course_id){
         return res.json({
             success:false,
@@ -92,7 +94,7 @@ const capturePayment= async(req,res) =>{
     
 
 };
-module.exports = capturePayment;
+//module.exports = capturePayment;
 
 
 //verify signature of razorpay and server_______________>
@@ -172,4 +174,7 @@ const verifySignature = async (req,res) =>{
    
 };
 
-module.exports = verifySignature;
+module.exports = {
+    verifySignature,
+    capturePayment
+}

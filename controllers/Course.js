@@ -95,7 +95,7 @@ const createCourse = async(req,res)=>{
         
     }
 }
-module.exports = createCourse;
+// module.exports = createCourse;
 
 
 
@@ -127,7 +127,7 @@ const showAllCourses = async(req,res)=>{
     
     }
 }
-module.exports = showAllCourses;
+// module.exports = showAllCourses;
 
 //get all courses details
  const getCourseDetails = async(req,res) =>{
@@ -172,7 +172,7 @@ module.exports = showAllCourses;
         })
 
 
-     } 
+     }    
      catch (error) {
         console.log(error)
         return res.status(500).json({
@@ -181,4 +181,8 @@ module.exports = showAllCourses;
         });
      }
  }
- module.exports = getCourseDetails;
+ module.exports = {
+    createCourse,
+    showAllCourses,
+    getCourseDetails,
+ };

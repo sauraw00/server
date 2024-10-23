@@ -52,7 +52,7 @@ const createSection = async(req,res) =>{
         
     }
 }
-module.exports = createSection;
+//module.exports = createSection;
 //________________________> update section
 
 const updateSection = async(req,res) =>{
@@ -86,7 +86,7 @@ const updateSection = async(req,res) =>{
            })
     }
 }
-module.exports = updateSection;
+//module.exports = updateSection;
 
 //____________________> deleteSection
 
@@ -115,4 +115,8 @@ const deleteSection = async(req,res) =>{
            })
     }
 }
-module.exports = deleteSection;
+module.exports = {
+    deleteSection,
+    updateSection,
+    createSection
+}

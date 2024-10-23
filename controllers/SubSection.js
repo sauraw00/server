@@ -57,7 +57,9 @@ const createSubSection = async(req,res)=>{
         
     }
 }
-module.exports = createSubSection; 
+module.exports = {
+    createSubSection
+}
 
 //hw updatesubsection
 //deletesubsection

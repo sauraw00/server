@@ -9,6 +9,7 @@ const auth =async(req,res,next) =>{
         const token = req.cookies.token
                              || req.body.token
                              || req.header("Autherisation").replace("Bearer","");
+        console.log("pass");
     //if token missing , then return response
     if(!token) {
             return res.status(401).json({
@@ -41,7 +42,7 @@ const auth =async(req,res,next) =>{
         
     }
 }
-module.exports = auth;
+// module.exports = auth;
 
 
 //isStudent
@@ -63,10 +64,12 @@ try {
     })
 }
 }
-module.exports = isStudent;
+// module.exports = isStudent;
 
 //isInstructor
 const isInstructor = async(req,res,next) =>{
+    console.log("inst pass");
+
     try {
        if(req.user.acountType!= "Instructor"){
         return res.status(401).json({
@@ -84,7 +87,7 @@ const isInstructor = async(req,res,next) =>{
         })
     }
     }
-    module.exports = isInstructor;
+    // module.exports = isInstructor;
     
 
 //isAdmin
@@ -106,5 +109,10 @@ const isAdmin = async(req,res,next) =>{
         })
     }
     }
-    module.exports = isAdmin;
+    module.exports = {
+        isAdmin,
+        auth,
+        isStudent,
+        isInstructor
+    }
     
